@@ -1,47 +1,34 @@
 import twitch
-import keypresser
-import keyholder
+#import keypresser
+#import keyholder
 #import client
 import credentials
 import socket
+from _socket import SHUT_RDWR
 
 t = twitch.Twitch();
-k = keypresser.Keypresser();
+#k = keypresser.Keypresser();
  
 username = credentials.username;
 key = credentials.key;
 t.twitch_connect(username, key);
-print("ebin");
-
-soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-soc.connect(("127.0.0.1", 1337))
-
 
 while True:
     new_messages = t.twitch_recieve_messages();
     if not new_messages:
         continue
     else:
-        print("ebin");
         for message in new_messages:
             msg = message['message'].lower();
             username = message['username'].lower();
             print(username + ": " + msg);
-            '''
-            if msg == "up": k.key_press("up");
-            if msg == "down": k.key_press(msg);
-            if msg == "right": k.key_press(msg);
-            if msg == "left": k.key_press(msg);
-            if msg == "a": k.key_press("f");
-            if msg == "b": k.key_press("d");
-            if msg == "start": k.key_press("a");
-            if msg == "select": k.key_press("s");
-            '''
-            if msg == "up": soc.sendall('1');
-            if msg == "down": keyholder.holdForSeconds('k', 2);
-            if msg == "start": keyholder.holdForSeconds("w", 2);
-            if msg == "select": keyholder.holdForSeconds("q", 2);
-            if msg == "right": keyholder.holdForSeconds('l', 2);
-            if msg == "left": keyholder.holdForSeconds("j", 2);
-            if msg == "a": keyholder.holdForSeconds(msg, 2);
-            if msg == "b": keyholder.holdForSeconds(msg, 2);
+            soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            soc.connect(("127.0.0.1", 1337))
+            if msg == "block 1": soc.sendall("1");
+            if msg == "block 2": soc.sendall("2");
+            if msg == "block 3": soc.sendall("3");
+            if msg == "block 4": soc.sendall("4");
+            if msg == "block 5": soc.sendall("5");
+            if msg == "block 6": soc.sendall("6");
+            soc.shutdown(socket.SHUT_RDWR)
+            soc.close()
