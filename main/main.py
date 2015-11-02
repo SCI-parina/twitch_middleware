@@ -1,8 +1,9 @@
 import twitch
 import keypresser
 import keyholder
-import client
+#import client
 import credentials
+import socket
 
 t = twitch.Twitch();
 k = keypresser.Keypresser();
@@ -12,7 +13,9 @@ key = credentials.key;
 t.twitch_connect(username, key);
 print("ebin");
 
-soc = client.Client("127.0.0.1")
+soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+soc.connect(("127.0.0.1", 1337))
+
 
 while True:
     new_messages = t.twitch_recieve_messages();
@@ -34,7 +37,7 @@ while True:
             if msg == "start": k.key_press("a");
             if msg == "select": k.key_press("s");
             '''
-            if msg == "up": soc.handle_write('1');
+            if msg == "up": soc.sendall('1');
             if msg == "down": keyholder.holdForSeconds('k', 2);
             if msg == "start": keyholder.holdForSeconds("w", 2);
             if msg == "select": keyholder.holdForSeconds("q", 2);
