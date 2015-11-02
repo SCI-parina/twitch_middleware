@@ -4,7 +4,7 @@ import twitch
 #import client
 import credentials
 import socket
-from _socket import SHUT_RDWR
+#from _socket import SHUT_RDWR
 
 t = twitch.Twitch();
 #k = keypresser.Keypresser();
@@ -19,6 +19,7 @@ while True:
         continue
     else:
         for message in new_messages:
+            print "ebin"
             msg = message['message'].lower();
             username = message['username'].lower();
             print(username + ": " + msg);
@@ -32,3 +33,4 @@ while True:
             if msg == "block 6": soc.sendall("6");
             soc.shutdown(socket.SHUT_RDWR)
             soc.close()
+        new_message = ""
