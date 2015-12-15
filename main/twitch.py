@@ -38,7 +38,7 @@ class Twitch:
             print("... they accepted our details");
             print("Connected to twitch.tv!")
             self.s = s;
-            s.send('JOIN #%s\r\n' % "blockwars")
+            s.send('JOIN #%s\r\n' % "blockwarsbot")
             s.recv(1024);
 
     def check_has_message(self, data):

@@ -19,7 +19,7 @@ while True:
         continue
     else:
         for message in new_messages:
-            print "ebin"
+            print "Message received!"
             msg = message['message'].lower();
             username = message['username'].lower();
             print(username + ": " + msg);
@@ -31,6 +31,9 @@ while True:
             if msg == "block 4": soc.sendall("4");
             if msg == "block 5": soc.sendall("5");
             if msg == "block 6": soc.sendall("6");
+            if msg == "block 7": soc.sendall("7");
+            if msg == "block 8": soc.sendall("8");
+            if msg == "block 9": soc.sendall("9");
             soc.shutdown(socket.SHUT_RDWR)
             soc.close()
         new_message = ""
